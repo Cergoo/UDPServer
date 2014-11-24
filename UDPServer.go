@@ -91,9 +91,10 @@ func (t *Server) reader() {
 		n, pack.Addr, e = t.conn.ReadFromUDP(pack.Pack)
 		if e != nil {
 			t.log.Println(e)
+		} else {
+			pack.Pack = pack.Pack[:n]
+			t.ChRead <- pack
 		}
-		pack.Pack = pack.Pack[:n]
-		t.ChRead <- pack
 	}
 }
 
