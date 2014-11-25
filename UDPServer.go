@@ -90,7 +90,7 @@ func (t *Server) reader() {
 		pack.Pack = make([]byte, t.frameSize)
 		n, pack.Addr, e = t.conn.ReadFromUDP(pack.Pack)
 		if e != nil {
-			t.log.Println(e)
+			return
 		} else {
 			pack.Pack = pack.Pack[:n]
 			t.ChRead <- pack
